@@ -19,7 +19,9 @@ public class CacheExample {
 				return "value-" + key;
 			}
 		};
-		LoadingCache<String, String> cache = CacheBuilder.newBuilder().expireAfterWrite(1, TimeUnit.MINUTES)
+		LoadingCache<String, String> cache = CacheBuilder.newBuilder()
+				.expireAfterWrite(1, TimeUnit.MINUTES)
+				.concurrencyLevel(5)
 				.build(cacheLoader);
 
 		for (int i = 0; i < 5000; i++) {
